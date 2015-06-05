@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Note 01 - ssh0のページ</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">ssh0のページ</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 05 18 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../2015-05-18/note_01/">Note 01</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 03 03 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../2015-03-03/draft/">Draft</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 03 10 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../2015-03-10/note_01/">Note 01</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 05 06 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../2015-05-06/note_01/">Note 01</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 05 30 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">Note 01</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 05 26 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../2015-05-26/note_01/">Note 01</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="next" href="../../2015-05-06/note_01/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../../2015-05-26/note_01/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#_1">基本のキーアサイン</a></li>
+        
+    
+        <li class="main "><a href="#_2">設定ファイル</a></li>
+        
+    
+        <li class="main "><a href="#ranger">rangerに関連して設定しておくといいもの</a></li>
+        
+    
+        <li class="main "><a href="#_3">まとめ</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>% コマンドラインで動かすファイルマネージャrangerの設定
+<div align="right">
+<p>2015-05-30</p>
+</div></p>
+<p>LinuxもしくはMacで使うことの出来る、CLIファイルマネージャである<a href="http://ranger.nongnu.org/">ranger</a>の紹介と、使いやすくする設定を紹介します。</p>
+<p><img alt="screen_007.jpg" src="../screen_007.jpg" />
+<img alt="screen_005.jpg" src="../screen_005.jpg" />
+<img alt="screen_006.jpg" src="../screen_006.jpg" /></p>
+<p>まず、rangerそのものについてですが、vimライクなキーアサインでも動かすことができ、設定ファイルも読みやすく、挙動も安定しているので、CLIで動くファイルマネージャを探しているのなら、迷わずこれでいいと思います。なにより軽いので、GUIでファイルマネージャを使うよりは軽快で、一度このスピードになれてしまうと、もう戻れない感覚だと思います。</p>
+<p>詳細な説明については、rangerの<a href="https://github.com/hut/ranger/wiki">Wiki</a>を見てもらうか、英語ですが以下の動画を見てもらえば分かるのではないかと思います。以下では、個人的に便利だと感じた使い方と、設定について述べていこうと思います。</p>
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=qooLR8NmYKs">Ranger - Console File Manager - Linux TUI - YouTube</a><br />
+<a href="https://www.youtube.com/watch?v=qooLR8NmYKs"><img alt=" Ranger - Console File Manager - Linux TUI - YouTube [Ranger - Console File Manager - Linux TUI - YouTube]" src="http://img.youtube.com/vi/qooLR8NmYKs/2.jpg" /></a></p>
+</li>
+<li>
+<p><a href="http://ranger.nongnu.org/screenshots.html">ranger screenshots</a></p>
+</li>
+</ul>
+<h2 id="_1">基本のキーアサイン</h2>
+<p>以下に基本的なキーアサインを書いておきます。これだけ押さえていれば、大体普通の作業をするのには困らないと思います。とってもVim的なキーバインドなので、慣れている人であれば、すぐに使えるようになると思います。</p>
+<p>+-----------------------+-----------------------------------------------------+
+| command               | 操作                                                |
++=======================+=====================================================+
+|<code>h,j,k,l</code> or 矢印キー  | 上下左右移動                                        |
++-----------------------+-----------------------------------------------------+
+|  <code>r</code>                  |  起動するアプリケーションを指定                     |
++-----------------------+-----------------------------------------------------+
+|  Space                | ファイルを選択                                      |
++-----------------------+-----------------------------------------------------+
+|  <code>v</code>                  | すべて選択                                          |
++-----------------------+-----------------------------------------------------+
+|  <code>V</code>                  | 選択モード(範囲選択)                                |
++-----------------------+-----------------------------------------------------+
+|  <code>y&lt;char&gt;</code>            | yank &amp; 何か操作                                     |
++-----------------------+-----------------------------------------------------+
+|  <code>yy</code>                 | 選択されているファイルをコピー                      |
++-----------------------+-----------------------------------------------------+
+|  <code>yp</code>                 | 選択されているファイルのフルパスをコピー(xselが必要)|
++-----------------------+-----------------------------------------------------+
+|  <code>d&lt;char&gt;</code>            | cut  &amp; 何か操作                                     |
++-----------------------+-----------------------------------------------------+
+|  <code>dd</code>                 | 選択されたファイルを切り取り                        |
++-----------------------+-----------------------------------------------------+
+|  <code>p&lt;char&gt;</code>            | 貼り付け + オプション                               |
++-----------------------+-----------------------------------------------------+
+|  <code>pp</code>                 | 切り取り、コピーしたファイルを貼り付け              |
++-----------------------+-----------------------------------------------------+
+|  Delete               | 削除(rm)                                            |
++-----------------------+-----------------------------------------------------+
+| <code>g&lt;char&gt;</code>             | <code>&lt;char&gt;</code>で指定された動きをする                      |
++-----------------------+-----------------------------------------------------+
+|  <code>gn</code> or Ctrl+<code>n</code>     | 新しいタブを開く                                    |
++-----------------------+-----------------------------------------------------+
+|   <code>gc</code> or  Ctrl+<code>w</code>   | タブを閉じる                                        |
++-----------------------+-----------------------------------------------------+
+|  <code>gt</code> or Ctrl+Tab     | 次のタブへ移動                                      |
++-----------------------+-----------------------------------------------------+
+|<code>gT</code> or Ctrl+Shift+Tab | 前のタブへ移動                                      |
++-----------------------+-----------------------------------------------------+
+| Alt+<code>&lt;n&gt;</code>             | 番号<code>&lt;n&gt;</code>のタブへ移動                               |
++-----------------------+-----------------------------------------------------+
+| <code>z&lt;char&gt;</code>             | オプションのトグル                                  |
++-----------------------+-----------------------------------------------------+
+| <code>zh</code>                  | 隠しファイルの表示/非表示のトグル                   |
++-----------------------+-----------------------------------------------------+
+|  <code>m&lt;char&gt;</code>            | 現在のディレクトリを<code>&lt;char&gt;</code>キーでブックマーク      |
++-----------------------+-----------------------------------------------------+
+|  <code></code><char><code>| ブックマークされたディレクトリに飛ぶ                |
++-----------------------+-----------------------------------------------------+
+|</code> <code></code> <code>| 最近開いたディレクトリに飛ぶ                        |
++-----------------------+-----------------------------------------------------+
+|</code>cw<code>| ファイル名を編集                                    |
++-----------------------+-----------------------------------------------------+
+|</code>A<code>| ファイル名を編集(現在のファイル名が入った状態)      |
++-----------------------+-----------------------------------------------------+
+|</code>/<code>| インクリメンタルサーチ                              |
++-----------------------+-----------------------------------------------------+
+|</code>S<code>| 現在のディレクトリでサブシェルに入る                |
++-----------------------+-----------------------------------------------------+
+|</code>:<code>|コマンド入力モードに入る(Ctrl+</code>c<code>で抜ける)           |
++-----------------------+-----------------------------------------------------+
+|</code>!<code>| 現在のディレクトリでシェルコマンドを実行する        |
++-----------------------+-----------------------------------------------------+
+|</code>q<code>| rangerを終了                                        |
++-----------------------+-----------------------------------------------------+
+|</code>?<code>|  マニュアルを表示                                   |
++-----------------------+-----------------------------------------------------+
+|</code>1?<code>|  キーバインディングを表示                           |
++-----------------------+-----------------------------------------------------+
+|</code>2?<code>|  コマンドのヘルプを表示                             |
++-----------------------+-----------------------------------------------------+
+|</code>3?`                  |  現在の設定値を表示                                 |
++-----------------------+-----------------------------------------------------+</p>
+<h2 id="_2">設定ファイル</h2>
+<p>rangerの設定ファイルは、Linuxなら<code>~/.config/ranger</code>以下にあります。</p>
+<p><img alt="screen_001.jpg" src="../screen_001.jpg" /></p>
+<p>rc.confではオプションとキーバインディングを、rifle.confでは、各ファイルタイプについて、どのプログラムを用いて開くかを設定できます。元々の設定ファイルがよく書かれているので、ある程度英語が読めれば、簡単に設定が出来ると思います。</p>
+<p>scope.shでは、</p>
+<pre><code class="bash"># ranger supports enhanced previews.  If the option &quot;use_preview_script&quot;
+# is set to True and this file exists, this script will be called and its
+# output is displayed in ranger.  ANSI color codes are supported.
+</code></pre>
+
+<p>とあるように、オプションでプレビュー表示をオンにしたとき(<code>set preview_files true</code>)に、ファイルタイプにあわせてどのようなプログラムを使ってプレビュー表示をさせるかを設定することができます。</p>
+<p>また、colorscheme以下に自分で定義したカラースキームを置き、モジュールとして読み込むようにしてあげると、カラースキームを変更することができます。デフォルトでは"default","jungle","snow"が使えます。</p>
+<p>自分の設定ファイル晒しときますね。</p>
+<ul>
+<li><a href="https://github.com/ssh0/dotfiles/tree/master/ranger">dotfiles/ranger at master · ssh0/dotfiles</a></li>
+</ul>
+<h2 id="ranger">rangerに関連して設定しておくといいもの</h2>
+<p>rangerを使っていると、cdコマンドを使って移動するより断然早くディレクトリ間を移動できるので、どんどん<code>S</code>でシェルで抜けてまたrangerを開いて・・・としていくことになるかと思います。さて、一段落したので端末を閉じましょう、というときに、<code>exit</code>とすると、rangerが立ち上がります。！？となるかもしれませんが、<code>S</code>はサブシェルを開いてその中で作業するものなので、気がついたらどんどんネストしていた、という自体に簡単に陥ります。これを解決する簡単な方法は、<code>~/.zshrc</code>などに、以下のように関数を登録しておくことです。(<a href="https://wiki.archlinux.org/index.php/Ranger#Start_new_ranger_instance_only_if_it.27s_not_running_in_current_shell">Start new ranger instance only if it's not running in current shell</a>)</p>
+<pre><code class="bash">function r() {
+    if [ -z &quot;$RANGER_LEVEL&quot; ]; then
+        ranger $@
+    else
+        exit
+    fi
+}
+</code></pre>
+
+<p>rangerはサブシェルを立ち上げるときに環境変数<code>$RANGER_LEVEL</code>にゼロでない値を入れていくので、これによって既にサブシェルの中にいるときに<code>r</code>でranegrを起動しようとしたときには一回そのサブシェルを閉じることでrangerの画面に戻るようにしたものが上のスクリプトの意味するところです。</p>
+<p>また、これと全く同じように、自分が今サブシェルにいるかどうかを判定することができるので、promptの情報としてこれを表示させれば便利ですね。以下の情報はかなり偏ったものですので飛ばして頂いても構いません。zsh以外のシェルやテーマを使っている方にとっても参考になればいいんですが。</p>
+<p>僕はoh-my-zshのagnosterテーマを改変して使っているので、その中で</p>
+<pre><code class="bash">prompt_ranger() {
+  if [[ -n ${RANGER_LEVEL} ]]; then
+    prompt_segment 236 blue &quot;®&quot;
+  fi
+}
+</code></pre>
+
+<p>としてプロンプトを表示する部分を定義しておいて、</p>
+<pre><code class="bash">## Main prompt
+build_prompt() {
+  RETVAL=$?
+  prompt_status
+  prompt_virtualenv
+  prompt_context
+  prompt_dir
+  prompt_git
+  prompt_ranger # &lt;&lt;&lt;
+  prompt_hg
+  prompt_end
+}
+</code></pre>
+
+<p>として反映させれば、サブシェル以下にいないときは</p>
+<p><img alt="screen_002.jpg" src="../screen_002.jpg" /></p>
+<p>のように表示されるのに対し、rangerから<code>S</code>で抜けた後は</p>
+<p><img alt="screen_003.jpg" src="../screen_003.jpg" /></p>
+<p>プロンプトが表示されて、今自分がrangerの作ったサブシェルの中にいることが見て分かるようになります。</p>
+<h2 id="_3">まとめ</h2>
+<p>以上、簡単ですがCLIファイルマネージャrangerの紹介と、その設定についてまとめました。ターミナル上で動かすことのメリットはたくさんあると思うので、ちょっとした日々の操作にも、ぜひ使ってみるといいと思います。皆さんのコマンドライン生活が豊かになりますように！</p></div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
