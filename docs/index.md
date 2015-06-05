@@ -1,17 +1,8 @@
-# Welcome to MkDocs
+# このページは何?
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+このページは、現役物理学徒のssh0が、日々の活動を記録していくページです。基本的に面倒くさがりで、なかなか続かないだろうとはわかっていますが、自分のスキルアップと、後学のためになることを願って、勉強したことはできるだけメモにしてここにあげていきたいと思っています。
 
-## Commands
+##
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
 
-## Project layout
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
