@@ -7,14 +7,14 @@
         
         
         
-        <link rel="shortcut icon" href="./img/favicon.ico">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>ssh0のページ</title>
+	<title>Note 01 - ssh0のページ</title>
 
-        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link href="./css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="./css/highlight.css">
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">ssh0のページ</a>
+            <a class="navbar-brand" href="../..">ssh0のページ</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -54,7 +54,7 @@
                 
                 
                     <li >
-                        <a href=".">Home</a>
+                        <a href="../..">Home</a>
                     </li>
                 
                 
@@ -65,7 +65,7 @@
                         
                             
 <li >
-    <a href="2015-05-18/note_01/">Note 01</a>
+    <a href="../../2015-05-18/note_01/">Note 01</a>
 </li>
 
                         
@@ -80,7 +80,7 @@
                         
                             
 <li >
-    <a href="2015-03-03/draft/">Draft</a>
+    <a href="../../2015-03-03/draft/">Draft</a>
 </li>
 
                         
@@ -95,7 +95,7 @@
                         
                             
 <li >
-    <a href="2015-03-10/note_01/">Note 01</a>
+    <a href="../../2015-03-10/note_01/">Note 01</a>
 </li>
 
                         
@@ -104,13 +104,13 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 05 06 <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
-<li >
-    <a href="2015-05-06/note_01/">Note 01</a>
+<li class="active">
+    <a href="./">Note 01</a>
 </li>
 
                         
@@ -125,7 +125,7 @@
                         
                             
 <li >
-    <a href="2015-05-30/note_01/">Note 01</a>
+    <a href="../../2015-05-30/note_01/">Note 01</a>
 </li>
 
                         
@@ -140,7 +140,7 @@
                         
                             
 <li >
-    <a href="2015-05-26/note_01/">Note 01</a>
+    <a href="../../2015-05-26/note_01/">Note 01</a>
 </li>
 
                         
@@ -158,13 +158,13 @@
                     </a>
                 </li>
                 
-                    <li class="disabled">
-                        <a rel="next" >
+                    <li >
+                        <a rel="next" href="../../2015-03-10/note_01/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
-                    <li class="disabled">
-                        <a rel="prev" >
+                    <li >
+                        <a rel="prev" href="../../2015-05-30/note_01/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -177,15 +177,31 @@
 
         <div class="container">
             
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#ipython-notebook">IPython Notebook をバージョンアップした時にしたこと</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
 
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
-    </div>
+<h1 id="ipython-notebook">IPython Notebook をバージョンアップした時にしたこと</h1>
+<p>つい先日何を思ったのか、pipで入れたパッケージを全部アップグレードするという暴挙を犯したので、今使っているIPythonのバージョンが3.1.0になりました。
+このバージョンではノートブックを立ち上げるとJupyterとして起動して、ipynbだけでなく、ほかの拡張子のファイルを閲覧したり編集したりすることができるようになっています。</p>
+<p>PDfはPDf.jsで閲覧できますし、マークダウンはシンタックスハイライトされた状態で別タブで開き、編集可能です。</p>
+<p>さて、IPyton Notebookをスライドの環境としても使いたい自分としては、この機能がどうなっているかが大事なポイントになってきます。</p>
+<p>そこで試してみると、ちゃんとスライドショーの表示ボタンも表示されて、ボタンを押せばレイアウトが変更されてスライドが始まるのですが、Jupyterから追加された影付きの枠(?)がスライドの右下に表示され、なんとも気持ち悪いことになりました。</p>
+<p>一応解決した方法を残しておきましょう。</p>
+<p>profileのファイルの中のstatic/cusom/custom.cssに</p>
+<pre><code class="css">.notebook_app {background-color: #FFF !important;}
+div#notebook-container {box-shadow: none !important;}
+</code></pre>
 
-
+<p>の2行を追加しておきます。こうすると、背景の灰色の部分が白色になり、影を描画しなくなります。</p>
+<p>なんだか根本的な解決にはなっていなように思えますが、まあこれで問題はなくなったので、よしとしましょう。</p></div>
+            
         </div>
 
         <footer class="col-md-12">
@@ -194,12 +210,12 @@
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        <script src="./js/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap-3.0.3.min.js"></script>
-        <script src="./js/highlight.pack.js"></script>
-        <script>var base_url = '.';</script>
-        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-        <script src="./js/base.js"></script>
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">

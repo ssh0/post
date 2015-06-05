@@ -7,14 +7,14 @@
         
         
         
-        <link rel="shortcut icon" href="./img/favicon.ico">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>ssh0のページ</title>
+	<title>Draft - ssh0のページ</title>
 
-        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link href="./css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="./css/highlight.css">
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">ssh0のページ</a>
+            <a class="navbar-brand" href="../..">ssh0のページ</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -54,7 +54,7 @@
                 
                 
                     <li >
-                        <a href=".">Home</a>
+                        <a href="../..">Home</a>
                     </li>
                 
                 
@@ -65,7 +65,7 @@
                         
                             
 <li >
-    <a href="2015-05-18/note_01/">Note 01</a>
+    <a href="../../2015-05-18/note_01/">Note 01</a>
 </li>
 
                         
@@ -74,13 +74,13 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">2015 03 03 <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
-<li >
-    <a href="2015-03-03/draft/">Draft</a>
+<li class="active">
+    <a href="./">Draft</a>
 </li>
 
                         
@@ -95,7 +95,7 @@
                         
                             
 <li >
-    <a href="2015-03-10/note_01/">Note 01</a>
+    <a href="../../2015-03-10/note_01/">Note 01</a>
 </li>
 
                         
@@ -110,7 +110,7 @@
                         
                             
 <li >
-    <a href="2015-05-06/note_01/">Note 01</a>
+    <a href="../../2015-05-06/note_01/">Note 01</a>
 </li>
 
                         
@@ -125,7 +125,7 @@
                         
                             
 <li >
-    <a href="2015-05-30/note_01/">Note 01</a>
+    <a href="../../2015-05-30/note_01/">Note 01</a>
 </li>
 
                         
@@ -140,7 +140,7 @@
                         
                             
 <li >
-    <a href="2015-05-26/note_01/">Note 01</a>
+    <a href="../../2015-05-26/note_01/">Note 01</a>
 </li>
 
                         
@@ -158,13 +158,13 @@
                     </a>
                 </li>
                 
-                    <li class="disabled">
-                        <a rel="next" >
+                    <li >
+                        <a rel="next" href="../../2015-05-18/note_01/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
-                    <li class="disabled">
-                        <a rel="prev" >
+                    <li >
+                        <a rel="prev" href="../../2015-03-10/note_01/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -177,15 +177,85 @@
 
         <div class="container">
             
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#_1">スクリーンショットを撮って日付のディレクトリに連番で保存するスクリプト</a></li>
+        
+    
+        <li class="main "><a href="#binsh">!/bin/sh</a></li>
+        
+    
+        <li class="main "><a href="#_3">スクリーンショットを保存するディレクトリを設定</a></li>
+        
+    
+        <li class="main "><a href="#_4">ファイル名を設定</a></li>
+        
+    
+        <li class="main "><a href="#_5">範囲選択 (別ファイルに分けてもよい)</a></li>
+        
+    
+        <li class="main "><a href="#import-quality-0-dirname">import -quality 0 $dir/$name</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
 
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
-    </div>
+<h1 id="_1">スクリーンショットを撮って日付のディレクトリに連番で保存するスクリプト</h1>
+<p>スクリーンショットを撮る機会はなかなか多いと思うのですが、皆さんはどのようにされているでしょうか。Linuxではshutterというアプリケーションがスクリーンショットを撮るのには使いやすいかなぁと思うんですが、保存する際には毎回どこに保存するか指定しなければならず、僕の場合日付ごとにファイルを分けたいので、少し不便でした。それで、今回シェルスクリプトで簡単に書いてみました。必要なパッケージはimagemagickです。</p>
+<p>下のスクリプトを</p>
+<pre><code>sh ~/bin/screenshot.sh
+</code></pre>
 
-
+<p>のようにオプション無しで実行すると、<code>rootdir</code>に指定したディレクトリ(下の例の場合<code>$HOME/Workspace/blog</code>)の中に、今日の日付のディレクトリがない場合には今日の日付を名前にしたディレクトリを作成し、その中に"screen_001.jpg"のように名前をつけて画面全体のスクリーンショットを保存します。ディレクトリの中に、同じ形式で名前が付けられたファイルがあった際には、その数字を読み取って、一番数の大きいものよりさらに一つ大きい数字をつけて保存します。保存が終わったら<code>notify-send</code>で保存したことを通知します。Macでは他の通知スクリプトがあると思うので、適宜そちらを使えば良いかと思います。</p>
+<p>また、基本的にキーボード・ショートカットにして使うことを考えているので、コマンドラインから使う場面はあまり考えていないのですが、一応オプションを与えることもできます。"d"で(日付のディレクトリのかわりに)保存するディレクトリを絶対パスで指定することができます。"o"で保存する画像ファイルの名前を指定することができます。</p>
+<p>ちなみに僕の場合はキーボードのPrintScreenを押した時は画面全体、Shiftを押しながらPrintScreenを押した時には範囲指定でスクリーンショットを撮るようにしています。</p>
+<p>``` sh: screenshot.sh</p>
+<h1 id="binsh">!/bin/sh</h1>
+<h1 id="_2"></h1>
+<p>get_dir=false
+get_name=false
+rootdir=$HOME/Workspace/blog</p>
+<p>if [ $# -le 0 ]; then
+    while getopts d:o: OPT
+    do
+      case $OPT in
+        "d" ) get_dir=true
+              dir="$OPTARG" ;;
+        "o" ) get_name=true
+              name="$OPTARG" ;;
+          * ) exit 1 ;;
+      esac
+    done
+fi</p>
+<h1 id="_3">スクリーンショットを保存するディレクトリを設定</h1>
+<p>if ! $get_dir; then
+    if [ ! -e $rootdir ]; then
+        echo "There is no directory named: $rootdir"
+        exit 1
+    fi
+    daydir=<code>date +%Y-%m-%d</code>
+    dir=$rootdir/$daydir
+fi</p>
+<h1 id="_4">ファイル名を設定</h1>
+<p>if ! $get_name; then
+    if [ ! -e $dir ]; then
+        mkdir $dir
+        i=1
+    else
+        i=<code>expr $(ls $dir | sed -n 's/screen_\([0-9]\{3\}\).jpg/\1/p' | tail -n 1) + 1</code>
+    fi
+    name=$(printf screen_%03d.jpg $i)
+fi</p>
+<p>import -window root -quality 0 $dir/$name</p>
+<h1 id="_5">範囲選択 (別ファイルに分けてもよい)</h1>
+<h1 id="import-quality-0-dirname">import -quality 0 $dir/$name</h1>
+<p>notify-send "Screenshot has been made" "saved: $dir/$name"</p>
+<p>exit 0
+```</p>
+<p>ディレクトリ構造はこんな感じになっていきます。</p></div>
+            
         </div>
 
         <footer class="col-md-12">
@@ -194,12 +264,12 @@
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
 
-        <script src="./js/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap-3.0.3.min.js"></script>
-        <script src="./js/highlight.pack.js"></script>
-        <script>var base_url = '.';</script>
-        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-        <script src="./js/base.js"></script>
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">

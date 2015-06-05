@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>markdownの編集環境をいい感じに整えてみた</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="/home/shotaro/Workspace/blog/styles/stylesheet.css">
+</head>
+<body>
+<div id="main_content_wrap" class="outer">
+<section id="main_content" class="inner">
+<header>
+<h1 class="title">markdownの編集環境をいい感じに整えてみた</h1>
+</header>
+<div align="right">
+<p>
+2015/05/26
+</p>
+</div>
+
+<p>markdownでちょっとしたメモを残すことが多いのですが、やっぱりそのままで見やすいとは言え、簡単にHTMLにレンダリングして表示してやりたいって気持ちになることも多いでしょう。</p>
+<p>ということで、僕がmarkdownエディタとして期待することは以下の項目。</p>
+<ul>
+<li>シンタックスハイライトが効く</li>
+<li>Vimみたいに動く</li>
+<li>リアルタイムプレビュー</li>
+<li>でもしょっちゅう更新して重くなってしまうようなものはナシ</li>
+<li>当然数式も表示できる</li>
+<li>vim</li>
+</ul>
+<p>以上の条件を満たすような環境を整えることができたと思うので、ここで紹介していきたいと思います。</p>
+<p>前提条件は</p>
+<ul>
+<li><a href="https://github.com/thinca/vim-quickrun">vim-quickrun</a></li>
+<li><a href="http://pandoc.org/">pandoc</a></li>
+<li>firefox<br /> (コマンドから新しいタブを開くことができ、ローカルファイルが変更された時自動で読み込むアドオン(<a href="https://addons.mozilla.org/en-US/firefox/addon/auto-reload/?src=api">firefox用“Auto Reload”</a>)があれば何でもよい)</li>
+</ul>
+<p>となっています。</p>
+<h2 id="vim-quickrun-pandoc-で幸せになれた">vim + quickrun + pandoc で幸せになれた。</h2>
+<p>まず、はじめにやったことは先人たちの作り上げたプラグインを入れて試してみることからでした。<a href="https://github.com/kannokanno/previm">previm</a>、<a href="https://github.com/suan/vim-instant-markdown">vim-instant-markdown</a>などを試してみて、使いやすいんだけど、自分でも何とか改善できないかなぁといった感じでした。特に数式やCSSでのスタイルの指定など、うまく設定すればなんとかなったのかもしれませんが、うまい解決策を見つけられませんでした。また、できるだけ最小構成でいきたい自分としては、これらは便利ではありましたが、ベストチョイスとは言えませんでした。そこで<a href="http://d.hatena.ne.jp/thinca/">thinca</a>さんによる<a href="https://github.com/thinca/vim-quickrun">vim-quickrun</a>を使って、変換と表示を行うようにしてみました。</p>
+<p>このプラグインを用いれば、例えば今編集しているファイルのタイプにしたがって:QuickRunを実行することによって、そのコードのテストを走らせたり、自動でインデントや構文の調整を行ったり、LaTeXのコンパイルから表示まで行ったり、そして自分で作った任意の関数やコードを実行することが出来るのです。</p>
+<p>自分の環境ではmarkdownからHTMLへの変換ツールとして<a href="http://pandoc.org/">pandoc</a>が一番使いやすそうだったので、これを使ってmarkdownからHTMLに変換し、作成したHTMLをブラウザで見るようにすることにしました。</p>
+<h3 id="下準備">下準備</h3>
+<p>vimでのmarkdownの編集をするために、</p>
+<ul>
+<li><a href="https://github.com/plasticboy/vim-markdown">vim-markdown</a><br /> シンタックスハイライト、自動折りたたみなど</li>
+<li><p>vimrcに以下を追記</p>
+<pre><code>set syntax=markdown
+autocmd BufRead,BufNewFile *.mkd set filetype=markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown</code></pre></li>
+</ul>
+<p>これで拡張子“.md”もしくは“.mkd”のファイルはファイルタイプmarkdownとして認識されるようになります。</p>
+<h3 id="pandocを使ってhtml形式に変換表示するシェルスクリプト">pandocを使ってHTML形式に変換、表示するシェルスクリプト</h3>
+<p>変換用のスクリプトは、以下のようにシェルスクリプトとして準備しました(<a href="https://github.com/ssh0/bin/blob/master/mkdpreview">mkdpreview</a>)。</p>
+<p>ここで、オプションは</p>
+<ul>
+<li>“-s”<br /> 引数がファイル名か文字列かによって、カレントディレクトリか/tmp以下にHTML形式のファイルを保存</li>
+<li>“-o (ファイル名)”<br /> 指定したファイル名でHTMLファイルを保存(sは自動で有効化)</li>
+<li>“-p”<br /> Firefoxの新しいタブでHTMLファイルを表示する</li>
+</ul>
+<p>のようになっています。</p>
+<p>また、<a href="http://pandoc.org/demos.html">pandocのDemo</a>を見てもらうと分かるように、自由にヘッダーとフッター、それからCSSファイルを指定することができるので、ここに好きなHTMLファイルやスタイルシートを指定しておきます(相対リンクだと/tmp以下に配置されたときに読み込まれないので、絶対パスにするか、Web上を参照させるのがいいと思います)。</p>
+<p>それから、数式もLaTeX形式で書いていれば、pandocへ渡すオプションに<code>-s --mathjax</code>などと入れておけば、<a href="https://www.mathjax.org/">MathJax</a>で数式に自動変換してくれます。MathJaxはオンラインで数式のレンダリングを行うので、オフラインで作業したい人は別の数式レンダリングのオプションを使うといいかもしれません。</p>
+<pre class="sh"><code>#!/bin/sh
+#
+
+template=&#39;/home/shotaro/Workspace/blog/styles/stylesheet.css&#39;
+# template=&#39;/home/shotaro/Workspace/blog/styles/bootstrap-md.css&#39;
+# template=&#39;http://szk-engineering.com/markdown.css&#39;
+header=&#39;/home/shotaro/Workspace/blog/html/header.html&#39;
+footer=&#39;/home/shotaro/Workspace/blog/html/footer.html&#39;
+
+usage() {
+    echo &quot;Simply render markdown by pandoc.&quot;
+    echo &quot;Usage: $0 [OPTION]&quot;
+    echo &quot;&quot;
+    echo &quot;OPTION:&quot;
+    echo &quot;  -s: Save html file in the source file dir.&quot;
+    echo &quot;  -o: Set the name of html file. ($0 -o bar.html foo.md)&quot;
+    echo &quot;  -p: Preview HTML file in firefox.&quot;
+    echo &quot;  -h: Show this message.&quot;
+    exit 1
+}
+save=false
+output=&quot;&quot;
+preview=false
+
+while getopts so:ph OPT
+do
+  case $OPT in
+    &quot;s&quot; ) save=true ;;
+    &quot;o&quot; ) save=true; output=&quot;${OPTARG}&quot; ;;
+    &quot;p&quot; ) preview=true ;;
+    &quot;h&quot; ) usage ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+if [ -f &quot;$1&quot; ]; then
+  dir=&quot;`cd $(dirname &quot;$1&quot;); pwd`&quot;
+  name=${1%.*}
+else
+  dir=&quot;$(pwd)&quot;
+  name=&quot;/tmp/$(cat /dev/urandom | tr -cd &#39;a-f0-9&#39; | head -c 32)&quot;
+fi
+
+if $save; then
+  if [ &quot;${output}&quot; = &quot;&quot; ]; then
+    output=&quot;${name}.html&quot;
+  fi
+  pandoc -f markdown -S -t html5 -c &quot;${template}&quot; -B &quot;${header}&quot; -A &quot;${footer}&quot; \
+    -s --mathjax -o &quot;${output}&quot; $@
+else
+  if [ ! -e &quot;${name}.html&quot; ];then
+    exit 0
+  else
+    output=&quot;${name}.html&quot;
+    pandoc -f markdown -S -t html5 -c &quot;${template}&quot; -B &quot;${header}&quot; -A &quot;${footer}&quot; \
+      -s --mathjax -o &quot;${output}&quot; $@
+  fi
+fi
+
+if $preview; then
+  firefox --new-tab &quot;file://${output}&quot;
+fi</code></pre>
+<h3 id="自作スクリプトをquickrunで動かすもちろんキーマッピングもする">自作スクリプトをquickrunで動かす(もちろんキーマッピングもする)</h3>
+<p>次にvim-quickrunで作成したスクリプトが実行できるようにします。<code>~/.vim/ftplugin/markdown_quickrun.vim</code>に以下のように記述します。説明はのちほど。</p>
+<ul>
+<li><a href="https://github.com/ssh0/dotfiles/blob/master/vimfiles/ftplugin/markdown_quickrun.vim">markdown_quickrun.vim</a></li>
+</ul>
+<pre class="vim"><code>&quot; markdown
+let g:quickrun_config = {
+\ &#39;markdown/normal&#39; : {
+\   &#39;outputter&#39; : &#39;error&#39;,
+\   &#39;outputter/error/error&#39; : &#39;message&#39;,
+\   &#39;command&#39; : &#39;mkdpreview&#39;,
+\   &#39;srcfile&#39; : expand(&quot;%&quot;),
+\   &#39;cmdopt&#39; : &#39;&#39;,
+\   &#39;exec&#39;: &#39;%c %o %s&#39;,
+\   },
+\
+\ &#39;markdown/visual&#39; : {
+\   &#39;outputter&#39; : &#39;error&#39;,
+\   &#39;outputter/error/error&#39; : &#39;message&#39;,
+\   &#39;command&#39; : &#39;mkdpreview&#39;,
+\   &#39;cmdopt&#39; : &#39;-p&#39;,
+\   &#39;exec&#39;: &#39;%c %o %s&#39;,
+\   },
+\}
+
+let g:quickrun_config[&#39;markdown&#39;] = {
+\ &#39;outputter&#39; : &#39;error&#39;,
+\ &#39;outputter/error/error&#39; : &#39;message&#39;,
+\ &#39;command&#39; : &#39;mkdpreview&#39;,
+\ &#39;cmdopt&#39; : &#39;-s -p&#39;,
+\ &#39;exec&#39;: &#39;%c %o %s&#39;,
+\}
+
+
+&quot; QuickRun and view compile result quickly
+nnoremap &lt;F5&gt; :QuickRun markdown/normal&lt;CR&gt;
+vnoremap &lt;F5&gt; :QuickRun markdown/visual&lt;CR&gt;
+
+autocmd BufWritePost,FileWritePost *.md QuickRun markdown/normal</code></pre>
+<p>このように書くと、vim-quickrunがこのファイル内を参照してくれるので、markdownファイルを開いた後、普通にノーマルモードで<code>:QuickRun</code>とすると、firefoxの新しいタブで現在のファイルがHTMLに変換されたものが表示されます(同名のHTMLファイルがディレクトリ内に作成されます)。それ以後はマークダウンファイルを上書きするたびにHTMLファイルが更新されます。F5を押せば手動でこの操作を行うことができます。また、ビジュアルモードで範囲を指定してF5キーを押せば、その範囲だけでレンダリングされ、/tmp以下に臨時ファイルが作られてそれをブラウザで表示して見ることができます。</p>
+<p>また、もし同ディレクトリ内に同名のHTMLファイルがない場合には、F5キーを押したり、保存を行っても何も起こりません。つまり、自分で<code>:QuickRun</code>コマンドを実行しないと、これらのプレビュー表示などは行われないことになります。ここらへんの柔軟性を自分で持たせることができるので、自分でスクリプトを書いてquickrunで動かすというのも、一つの手だと思います。まぁ、自分がVimScriptがなかなか書けない&amp;読めないというのもあるのですが。</p>
+<p>それと、はじめの前提条件のところでも少し言及しましたが、この設定自体にはブラウザの操作は入っていないので、Firefoxだったら<a href="https://addons.mozilla.org/en-US/firefox/addon/auto-reload/?src=api">Auto Reload</a>のようなアドオンが別途必要になります。他のプラグインなどではローカルサーバーをたてて、そこを見るようにしてこの問題を解決しているようですね。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>ということで、はじめに示した条件を満たす環境を構築することができたのではないかと思います。quickrunの仕様をしっかりと理解した作りになっているかはわかりませんが、個人でシェルスクリプトを作りためてる人はこのようにしていけば簡単に自分の思った通りの挙動をさせることができて便利だと思います。</p>
+<p>LaTeXの編集に関しても、latexmkを使った全体のコンパイルと部分コンパイルの設定を行ったので、そちらもまとめ次第こちらにアップしたいと思います。</p>
+<p>お疲れ様でした。</p>
+</section>
+</div>
+</body>
+</html>
